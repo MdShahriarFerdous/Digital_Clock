@@ -1,5 +1,7 @@
 # Digital_Clock
 
+Link:
+https://digital-clock-byshahriar.netlify.app/
 
 1. First I have taken a function called digitalClockTime() which has the variables for 
 the divs selection by DOM.
