@@ -68,7 +68,7 @@
 				//if hour is less than 10 then add a 0 infront of it
 				//else if hour is equal to 0 then it is 12 AM
 				//else the regular hour from top.
-				const hours = hrs < 10 ? `0${hrs}` : hrs === 0 ? 12 : hrs;
+				const hours = hrs === 0 ? 12 : hrs < 10 ? `0${hrs}` : hrs;
 
 				hrDiv.innerHTML = `${hours}`;
 				minDiv.innerHTML = `${mins}`;
