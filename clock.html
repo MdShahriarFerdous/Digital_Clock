@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Digital_clock</title>
+		<link rel="stylesheet" href="clock.css" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600&family=Space+Mono:wght@400;700&display=swap"
+			rel="stylesheet"
+		/>
+	</head>
+	<body>
+		<main>
+			<!-- Title Div-->
+			<div class="title-div">
+				<h1 class="title">Digital Clock</h1>
+			</div>
+			<!-- Main Clock Div -->
+			<div class="clock-div">
+				<div class="hour-div"></div>
+				<span class="dot-span">:</span>
+				<div class="min-div"></div>
+				<span class="dot-span">:</span>
+				<div class="sec-div"></div>
+				<div class="am-pm-div"></div>
+			</div>
+			<!-- Current Date Div -->
+			<div class="date-div"></div>
+		</main>
+
+		<footer>
+			<p class="footer-para">Made with 💓 @ Md. Shahriar Ferdous</p>
+		</footer>
+
+		<script>
+			function digitalClockTime() {
+				const hrDiv = document.querySelector(".hour-div");
+				const minDiv = document.querySelector(".min-div");
+				const secDiv = document.querySelector(".sec-div");
+				const am_pmDiv = document.querySelector(".am-pm-div");
+
+				const date = new Date();
+				// if hour is above 12 (like 13,14) then (-) 12 from it or the
+				// regular getHours() method.
+				let hrs =
+					date.getHours() > 12
+						? date.getHours() - 12
+						: date.getHours();
+
+				//if minutes are less than 10 (like 9,8) then concatenate 0 infront of it.
+				const mins =
+					date.getMinutes() < 10
+						? `0${date.getMinutes()}`
+						: date.getMinutes();
+				//same as minutes.
+				const sec =
+					date.getSeconds() < 10
+						? `0${date.getSeconds()}`
+						: date.getSeconds();
+				//if hour is less than 12 noon then it is AM except from that it is PM.
+				const am_pm = date.getHours() < 12 ? "AM" : "PM";
+
+				//this ternary operator is like if and else if
+				//if hour is less than 10 then add a 0 infront of it
+				//else if hour is equal to 0 then it is 12 AM
+				//else the regular hour from top.
+				const hours = hrs < 10 ? `0${hrs}` : hrs === 0 ? 12 : hrs;
+
+				hrDiv.innerHTML = `${hours}`;
+				minDiv.innerHTML = `${mins}`;
+				secDiv.innerHTML = `${sec}`;
+				am_pmDiv.innerHTML = `${am_pm}`;
+			}
+
+			function digitalClockDate() {
+				const date = new Date();
+				const days = [
+					"Sunday",
+					"Monday",
+					"Tuesday",
+					"Wednesday",
+					"Thursday",
+					"Friday",
+					"Saturday",
+				];
+
+				const currentDay = days[date.getDay()]; // date.getDay() is giving a number of current day.
+
+				const currentDate = date.toLocaleDateString();
+
+				return ` ${currentDay}, ${currentDate} `;
+			}
+			const currentDateDiv = document.querySelector(".date-div");
+			currentDateDiv.innerHTML = digitalClockDate();
+
+			// call digitalClockTime() every second to update the clock
+			setInterval(digitalClockTime, 1000);
+		</script>
+	</body>
+</html>
